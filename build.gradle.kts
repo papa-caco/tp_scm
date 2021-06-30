@@ -1,9 +1,11 @@
 plugins {
     id("java")
+	id("jacoco")
     id("com.diffplug.eclipse.apt") version "3.29.1"
     id("com.diffplug.spotless") version "5.12.5"
     id("org.springframework.boot") version "2.5.0"
     id("org.seasar.doma.compile") version "1.1.0"
+	id("org.sonarqube") version "3.3"
 }
 
 apply(plugin = "io.spring.dependency-management")
@@ -45,7 +47,7 @@ dependencies {
     implementation("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:2.5.3")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
-        exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
+        //exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
     }
 }
 
