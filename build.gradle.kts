@@ -21,6 +21,12 @@ java {
     targetCompatibility = JavaVersion.VERSION_11
 }
 
+tasks.jacocoTestReport {
+    reports {
+        xml.isEnabled = true
+    }
+}
+
 springBoot {
     mainClass.set("sample.Application")
 }
@@ -78,4 +84,16 @@ tasks {
     test {
         useJUnitPlatform()
     }
+}
+
+val testCoverage by tasks.registering {
+    group = "verification"
+    description = "Runs the unit tests with coverage"
+
+    dependsOn(":test",
+            ":jacocoTestReport",
+            ":jacocoTestCoverageVerification")
+
+    tasks["jacocoTestReport"].mustRunAfter(tasks["test"])
+    tasks["jacocoTestCoverageVerification"].mustRunAfter(tasks["jacocoTestReport"])
 }
